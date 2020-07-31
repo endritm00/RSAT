@@ -1,0 +1,388 @@
+﻿@model RSAT.Api.Data.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <meta http-equiv="refresh" content="600">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="ibox-content m-b-sm border-bottom">
+
+                <div class="p-xs">
+                    <div class="pull-left m-r-md">
+
+                    </div>
+                    <style type="text/css">
+
+                        .tg {
+                            border-collapse: collapse;
+                            border-spacing: 0;
+                        }
+
+                            .tg td {
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                padding: 16px 20px;
+                                border-style: solid;
+                                border-width: 1px;
+                                overflow: hidden;
+                                word-break: normal;
+                                border-color: black;
+                            }
+
+                            .tg th {
+                                font-family: Arial, sans-serif;
+                                font-size: 14px;
+                                font-weight: normal;
+                                padding: 16px 20px;
+                                border-style: solid;
+                                border-width: 1px;
+                                overflow: hidden;
+                                word-break: normal;
+                                border-color: black;
+                            }
+
+                            .tg .tg-oae7 {
+                                font-size: 11px;
+                                background-color: #fcf9f9;
+                                border-color: inherit;
+                                text-align: left;
+                            }
+
+                            .tg .tg-oae8 {
+                                background-color: #1ab394;
+                                border-color: inherit;
+                                color: #FFFFFF;
+                                font-size: 11px;
+                            }
+
+                            .tg .tg-htpk {
+                                font-size: 11px;
+                                background-color: #ffffff;
+                                border-color: inherit;
+                                text-align: left;
+                                vertical-align: top
+                            }
+
+                        .asc:after {
+                            content: ' \25B2';
+                        }
+
+                        .desc:after {
+                            content: ' \25BC';
+                        }
+
+                        .dropbtn {
+                            background-color: #1ab394;
+                            color: white;
+                            padding: 10px 12px;
+                            font-size: 15px;
+                            border: 8px;
+                        }
+
+                        .dropdown {
+                            position: initial;
+                            display: inline-block;
+                        }
+
+                        .dropdown-content {
+                            display: none;
+                            position: absolute;
+                            background-color: #f1f1f1;
+                            min-width: 160px;
+                            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                            z-index: 1;
+                        }
+
+                            .dropdown-content a {
+                                color: black;
+                                padding: 12px 16px;
+                                text-decoration: none;
+                                display: block;
+                            }
+
+                                .dropdown-content a:hover {
+                                    background-color: #ddd;
+                                }
+
+                        .dropdown:hover .dropdown-content {
+                            display: block;
+                        }
+
+                        .dropdown:hover .dropbtn {
+                            background-color: #3e8e41;
+                        }
+                    </style>
+                    <script>
+                        function myFunction() {
+                            var input, filter, table, tr, td, i;
+                            input = document.getElementById("myInput");
+                            filter = input.value.toUpperCase();
+                            table = document.getElementById("myTable");
+                            tr = table.getElementsByTagName("tr");
+                            for (i = 0; i < tr.length; i++) {
+                                td = tr[i].getElementsByTagName("th")[0];
+                                if (td) {
+                                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                                        tr[i].style.display = "";
+                                    } else {
+                                        tr[i].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+
+
+                    </script>
+                    <script>
+                        function sortStatus() {
+                            var table, rows, switching, i, x, y, shouldSwitch;
+                            table = document.getElementById("myTable");
+                            switching = true;
+
+                            while (switching) {
+
+                                switching = false;
+                                rows = table.rows;
+
+                                for (i = 1; i < (rows.length - 1); i++) {
+
+                                    shouldSwitch = false;
+
+                                    x = rows[i].getElementsByTagName("th")[2];
+                                    y = rows[i + 1].getElementsByTagName("th")[2];
+
+                                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+
+
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                }
+                                if (shouldSwitch) {
+
+                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                    switching = true;
+                                }
+                            }
+                        }
+                        function sortStatusDesc() {
+
+                            var table, rows, switching, i, x, y, shouldSwitch;
+                            table = document.getElementById("myTable");
+                            switching = true;
+
+                            while (switching) {
+
+                                switching = false;
+                                rows = table.rows;
+
+                                for (i = 1; i < (rows.length - 1); i++) {
+
+                                    shouldSwitch = false;
+
+                                    x = rows[i].getElementsByTagName("th")[2];
+                                    y = rows[i + 1].getElementsByTagName("th")[2];
+
+                                    if (x.innerHTML.indexOf('Dalje') > y.innerHTML.indexOf('Dalje')) {
+
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                }
+                                if (shouldSwitch) {
+
+                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                    switching = true;
+                                }
+                            }
+                        }
+                        function sortStatusT() {
+
+                            var table, rows, switching, i, x, y, shouldSwitch;
+                            table = document.getElementById("myTable");
+                            switching = true;
+
+                            while (switching) {
+
+                                switching = false;
+                                rows = table.rows;
+
+                                for (i = 1; i < (rows.length - 1); i++) {
+
+                                    shouldSwitch = false;
+
+                                    x = rows[i].getElementsByTagName("th")[2];
+                                    y = rows[i + 1].getElementsByTagName("th")[2];
+
+                                    if (x.innerHTML.indexOf("Takim / Meeting") < y.innerHTML.indexOf("Takim / Meeting")) {
+
+                                        shouldSwitch = true;
+                                        break;
+                                    }
+                                }
+                                if (shouldSwitch) {
+
+                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                    switching = true;
+                                }
+                            }
+                        }
+
+                    </script>
+                    <button class="btn btn-success fa fa-refresh" onClick="window.location.reload()"> Refresh</button>
+                    <br />
+                    <br />
+                    <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+                    <br />
+                    <script src="~/js/sorttable.js"></script>
+
+                    <!--Import jQuery before export.js-->
+                    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+                    <!--Data Table-->
+                    <script type="text/javascript" src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+                    <script type="text/javascript" src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+                    <script type="text/javascript" src=" https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
+
+                    <!--Export table buttons-->
+                    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+                    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"></script>
+                    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
+                    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+                    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+                    <!--Export table button CSS-->
+                    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+                    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+                    <div class="table-responsive">
+
+                        <table id="myTable2" class="display ui-datepicker-row-break" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>User Id</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table id="myTable1" class="display ui-datepicker-row-break" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Working Hours</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Import jQuery before export.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!--Data Table-->
+    <script type="text/javascript" src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src=" https://cdn.datatables.net/plug-ins/1.10.19/api/sum().js"></script>
+
+    <!--Export table buttons-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+
+    <!--Export table button CSS-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.noConflict();
+
+            $('#myTable1').DataTable({
+                "ajax": {
+                    "url":"@Url.Action("WorkingHours", "Dashboard")",
+                    "type": "POST",
+                    "datatype": "application/json",
+
+                },
+
+                "serverSide" : "true",
+                "processing": "true",
+                "columns": [
+                    { "data": "UserId", "name": "UserI", "autoWidth": true },
+                    { "data": "Name", "name": "Name", "autoWidth": true },
+                    { "data": "WorkingHours", "name": "WorkingHours", "autoWidth": true },
+                    { "data": "Date", "name": "Date", "autoWidth": true }
+
+                ],
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'pdf', 'csv', 'print', 'excel'
+                ]
+            });
+                });
+
+
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#myTable2").DataTable({
+                "ajax": {
+                    "url": "@Url.Action("Status","Dashboard")",
+                    "type": "POST",
+                    "data": "json",
+                    "contentType": "application/json",
+                    
+                },
+
+                "processing": "true",
+                "columns": [
+                    { "data": "Id", "name": "Id" },
+                    { "data": "Name", "name": "Name" },
+                    { "data": "Department", "name": "Department" },
+                    { "data": "ActualCheckinStatuse.CheckStatus", "name": "ActualCheckinStatuse.CheckStatus"},
+
+                ],
+            });
+             });
+    </script>
+
+
+    @*<link href="~/lib/tabulator/dist/css/tabulator.min.css" rel="stylesheet">
+                <script type="text/javascript" src="~/lib/tabulator/dist/js/tabulator.min.js"></script>
+        <script type="text/javascript">
+            var table = new Tabulator("#MyTable", {
+                ajaxURL: "@Url.Action("WorkingHours", "Dashboard")",
+                ajaxConfig: "post", //ajax HTTP request type
+                ajaxContentType:"json", // send parameters to the server as a JSON encoded string
+                height: "292px",
+                layout: "fitColumns",
+                pagination: "local",
+                paginationSize: 20,
+                movableColumns: true,
+                columns: [
+                    { title: "UserId", field: "Id", formatter: "star", align: "center", width: 100 },
+                    //{ title: "Name", field: "name", width: 200 },
+                    { title: "Working Hours", field: "progress" , sorter : "number" },
+                    { title: "Date", field: "dob", align: "center", sorter: "date" },
+                ],
+            });
+        </script>*@

@@ -1,0 +1,75 @@
+﻿@model NovusConsulting.Api.ViewModels.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="~/favicon.ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/metisMenu/dist/metisMenu.min.css" />
+    <link rel="stylesheet" href="~/css/animate.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body class="gray-bg i18container">
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <img alt="image" src="~/images/logo.png" />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6 b-r">
+                <h3 class="font-bold">Welcome to the administration panel</h3>
+                <p>RSAT API is an awesome API for managing employee records.</p>
+                <p>RSAT is an integrated information system. It is designed and developed to help the department of human resources, in their research activities.</p>
+                <p>
+                    <i class="fa fa-info-circle"></i>
+                    <a href="../api-explorer" target="_blank">Integration utilizing REST API</a>
+                </p>
+            </div>
+            <div class="col-md-6">
+                <form class="m-t" role="form" method="post" action="@Url.Action("Login", "Account")">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="Username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="Password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success block full-width m-b">Login</button>
+                </form>
+                <span style="color: red;">@Model.Message</span>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                Novus Consulting
+            </div>
+            <div class="col-md-6 text-right">
+                <small>© @DateTime.Now.Year</small>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="~/lib/pace/pace.min.js"></script>
+    <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="~/js/script.js"></script>
+    <script src="~/js/i18next.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () { });
+    </script>
+</body>
+</html>

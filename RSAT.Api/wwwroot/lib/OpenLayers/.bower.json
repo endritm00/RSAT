@@ -1,0 +1,14 @@
+{
+  "name": "OpenLayers",
+  "homepage": "https://github.com/openlayers/ol3",
+  "version": "5.0.3",
+  "_release": "5.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v5.0.3",
+    "commit": "1838299c8549314eef6fad26ed5bec1dec17c9f5"
+  },
+  "_source": "https://github.com/openlayers/ol3.git",
+  "_target": "v5.0.3",
+  "_originalSource": "OpenLayers"
+}

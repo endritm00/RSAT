@@ -1,0 +1,82 @@
+﻿@model RSAT.Api.Data.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+
+
+<div class="col-lg-6">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Simple pie chart</h5>
+        </div>
+        <div class="ibox-content">
+            <select class="btn btn-white dropdown-toggle">
+                @foreach (var item in Model.EmployeeCollection)
+                {
+                    <option>
+                        @item.Name
+                    </option>
+                }
+            </select>
+            <div id="ct-chart5" class="ct-perfect-fourth"></div>
+        </div>
+    </div>
+</div>
+@section Styles {
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/chartist/chartist.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/lib/chartist/chartist.min.css" />
+    </environment>
+}
+@section Scripts {
+    <environment names="Development">
+        <script src="~/lib_bower/chartist/dist/chartist.js"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib_bower/chartist/dist/chartist.min.js"></script>
+    </environment>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // Simple pie chart
+            var data = {
+
+                series: [5, 4, 3]
+
+            };
+                var sum = function (a, b) { return a + b };
+
+            var z = {
+                
+                series: {
+                    Name: $("#Name").val(),
+                    WorkingHours: $("#WorkingHours").val,
+                },
+            };
+             $.ajax({
+                    "url": "@Url.Action("WorkingHours","Chart")",
+                    "type": "POST",
+                    "dataType": "json",
+                    "serverSide": "true",
+                    "processing": "true",
+
+                 data: JSON.stringify({"WorkingHours":  3, "WorkingMinutes": 30}),
+                     success: function (response) {
+                           new Chartist.Pie('#ct-chart5', data, {
+                               labelInterpolationFnc: function (value) {
+                                   return data;
+                        }
+                    });
+                },
+            });
+
+
+        });
+    </script>
+}

@@ -1,0 +1,97 @@
+﻿@model RSAT.Api.Data.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    #Div {
+        background-color: red;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInRight">
+
+            <div class="ibox-content m-b-sm border-bottom">
+
+                <div class="p-xs">
+
+
+
+                </div>
+                @{
+                    var numberOfColsNeeded = 6;
+                    var totalCounter = Model.EmployeeCollection.Count();
+                    var itemCounter = 1;
+                }
+                @foreach (var item in Model.EmployeeCollection)
+                {
+                    {
+                        if (itemCounter % numberOfColsNeeded == 1)
+                        {
+                            @:<div class="row">
+                            }
+
+                            <div class="col-lg-2">
+
+                                @if (item.ActualCheckinStatuse != null)
+                                {
+                                    @if (item.ActualCheckinStatuse.CheckStatus.Contains("Hyrje"))
+                                    {
+                                        @:<div class="contact-box" style="background-color:rgba(63, 191, 63, 0.46);border-radius: 37%;">
+                                        }
+                                    @if (item.ActualCheckinStatuse.CheckStatus.Contains("Dalje"))
+                                    {
+                                        @:<div class="contact-box" style="background-color:rgba(219, 81, 81, 0.46);border-radius: 37%;">
+                                        }
+                                    @if (item.ActualCheckinStatuse.CheckStatus.Contains("Takim"))
+                                    {
+                                        @:<div class="contact-box" style="background-color:rgba(219, 210, 81, 0.46);border-radius: 37%;">
+                                        }
+                                    @if (item.ActualCheckinStatuse.CheckStatus.Contains("Pauze"))
+                                    {
+                                        @:<div class="contact-box" style="background-color:rgba(81, 164, 219, 0.46);border-radius: 37%;">
+                                        }
+                                    @if (item.ActualCheckinStatuse == null)
+                                    {
+                                        @:<div class="contact-box" style="background-color:rgba(148, 146, 146, 0.4);">
+                                        }
+
+                                    <a asp-controller="Profile" asp-route-id="@item.Id">
+                                        <div class="col-4">
+                                            <div class="text-center">
+                                                @if (item.Picture != null)
+                                                {
+                                                    var base64 = Convert.ToBase64String(item.Picture);
+                                                    var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
+
+                                                    <img alt="image" class="img-circle" width="80px" height="80px" src="@imgSrc">
+                                                }
+                                                else
+                                                { <img alt="image" class="img-circle" width="80px" height="80px" src="~/images/employee.jpg">}
+                                            </div>
+                                        </div>
+
+                                        <div class="col-8 text-center">
+                                            <br />
+                                            <h3><strong>@item.Name</strong></h3><br />
+                                        </div>
+                                    </a>
+                                @:</div>
+                            }
+                            </div>
+                            if ((itemCounter % numberOfColsNeeded == 0) || ((itemCounter) == totalCounter))
+                            {
+                            @:</div>
+                        }
+                        itemCounter++;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    @section scripts {
+        <script type="text/javascript">
+            $(document).ready(function () { });
+        </script>
+    }

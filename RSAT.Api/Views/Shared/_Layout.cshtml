@@ -1,0 +1,122 @@
+﻿@model NovusConsulting.Api.ViewModels.LayoutViewModel
+@using RSAT.Api.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
+    <environment names="Development,Staging,Production">
+        <link rel="shortcut icon" href="~/favicon.ico" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="~/lib/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="~/css/animate.css" />
+        <link rel="stylesheet" href="~/lib/sweetalert/dist/sweetalert.css" />
+        <link rel="stylesheet" href="~/lib/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" />
+        <link rel="stylesheet" href="~/lib/tabulator/dist/css/semantic-ui/tabulator_semantic-ui.min.css" />
+        <link rel="stylesheet" href="https://cdn.flexmonster.com/theme/teal/flexmonster.min.css" />
+        <link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+        <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.0.3/css/ol.css" type="text/css">
+        <link rel="stylesheet" href="~/css/style.css" />
+        @*<script src="js/plugins/dataTables/datatables.min.js"></script>*@
+        @*<script src="js/plugins/dataTables/dataTables.bootstrap4.min.js"></script>*@
+    </environment>
+</head>
+<body class="mini-navbar i18container">
+    <!-- Wrapper-->
+    <div id="wrapper" class="@Html.PageClass()">
+        <!-- Navigation -->
+        @Html.Partial("_Navigation", Model)
+        <!-- Page wraper -->
+        <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+            <!-- Top Navbar -->
+            @Html.Partial("_TopNavbar", Model)
+            <!-- Main view  -->
+            @RenderBody()
+            <!-- Footer -->
+            @Html.Partial("_Footer", Model)
+        </div>
+        <!-- End page wrapper-->
+        <!-- Right Sidebar -->
+        @Html.Partial("_RightSidebar", Model)
+    </div>
+    <!-- End wrapper-->
+    <environment names="Development,Staging,Production">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="~/lib/pace/pace.min.js"></script>
+        <script src="~/lib/slimScroll/jquery.slimscroll.min.js"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+        <script src="~/lib/tabulator/dist/js/tabulator.min.js"></script>
+        @*<script src="~/js/xlsx.full.min.js"></script>*@
+        <script src="~/lib/file-saver/FileSaver.min.js"></script>
+        <script src="https://cdn.flexmonster.com/2.4/flexmonster.js"></script>
+        <script src="~/lib/select2/dist/js/select2.min.js"></script>
+        <script src="~/lib/papaparse/papaparse.min.js"></script>
+        <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.0.3/build/ol.js"></script>
+        @*<script src="~/js/i18next.min.js"></script>*@
+        <script src="~/js/script.js"></script>
+        <script type="text/javascript">
+            //Entities
+            var OPERATION_URL = '@Url.Action("Get", "Operation", new { Area = "v1" })';
+            var SCHEMA_URL = '@Url.Action("Get", "Schema", new { Area = "v1" })';
+            var TABLE_URL = '@Url.Action("Get", "Table", new { Area = "v1" })';
+            var COLUMN_URL = '@Url.Action("Get", "Column", new { Area = "v1" })';
+            var ROLE_URL = '@Url.Action("Get", "Role", new { Area = "v1" })';
+            var PRIVILEGE_URL = '@Url.Action("Get", "Privilege", new { Area = "v1" })';
+            var USER_URL = '@Url.Action("Get", "User", new { Area = "v1" })';
+            var USERROLE_URL = '@Url.Action("Get", "UserRole", new { Area = "v1" })';
+            var USERLOG_URL = '@Url.Action("Get", "UserLog", new { Area = "v1" })';
+            var USERSESSION_URL = '@Url.Action("Get", "UserSession", new { Area = "v1" })';
+            var REPORT_URL = '@Url.Action("Get", "Report", new { Area = "v1" })';
+            var ETLFILE_URL = '@Url.Action("Get", "EtlFile", new { Area = "v1" })';
+            var ETLPROCESSWORKFLOW_URL = '@Url.Action("Get", "EtlProcessWorkflow", new { Area = "v1" })';
+            var ETLPROCESS_URL = '@Url.Action("Get", "EtlProcess", new { Area = "v1" })';
+            var ETLEXTRACTION_URL = '@Url.Action("Get", "EtlExtraction", new { Area = "v1" })';
+            var ETLTRANSFORMATION_URL = '@Url.Action("Get", "EtlTransformation", new { Area = "v1" })';
+            var ETLMAPPINGRULE_URL = '@Url.Action("Get", "EtlMappingRule", new { Area = "v1" })';
+            var ETLPROCESSTRANSACTION_URL = '@Url.Action("Get", "EtlProcessTransaction", new { Area = "v1" })';
+            //Extra
+            var ACCOUNT_PROFILE_URL = '@Url.Action("Profile", "Account")';
+            var ETL_URL = '@Url.Action("Get", "Etl", new { Area = "v1" })';
+            var CACHE_URL = '@Url.Action("Get", "Cache", new { Area = "v1" })';
+            var LOADING_INTERVAL = null;
+            $(document).ajaxStart(function () {
+                $('.ibox').children('.ibox-content').toggleClass('sk-loading');
+                //Loading
+                var startDateTime = new Date().getTime();
+                var durationText = "";
+                LOADING_INTERVAL = setInterval(function () {
+                    //Current time
+                    var currentDateTime = new Date().getTime();
+                    //Difference
+                    var difference = currentDateTime - startDateTime;
+                    //Caculations
+                    var days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                    //Duration text
+                    durationText = "" + days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+                    //Display
+                    $("#lblStatus").text("Working, please wait (" + durationText + ")");
+                }, 1000);
+            });
+            $(document).ajaxStop(function () {
+                clearInterval(LOADING_INTERVAL);
+                $('.ibox').children('.ibox-content').toggleClass('sk-loading');
+            });
+            //Initialization
+            $(document).ready(function () { });
+        </script>
+    </environment>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
